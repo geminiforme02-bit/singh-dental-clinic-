@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rate Your Visit — Singh Dental Clinic, Mansa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27%3E%3Crect width=%2724%27 height=%2724%27 rx=%275%27 fill=%27%230f8a76%27/%3E%3Cpath d=%27M12 5c-1.6-1.1-3.5-1.3-4.8.1C5.5 6.9 5.3 9.8 6.1 12.7c.6 1.9 1 4 1.7 5.1.5.8 1.6.6 1.8-.5.2-1.1.4-2.5 1-3.1.4-.4.8-.4 1.1 0 .5.6.7 2 1 3.1.2 1.1 1.3 1.3 1.8.5.7-1.1 1.1-3.2 1.7-5.1.8-2.9.6-5.8-1.1-7.5C15.5 3.7 13.6 6.1 12 5Z%27 fill=%27%23fff%27/%3E%3C/svg%3E" />
+<meta name="description" content="Tell us about your visit to Singh Dental Clinic, Mansa — your feedback helps us keep smiling." />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<style>
+  /* ===== Review page — scoped styles, built on the global design tokens ===== */
+  body[data-page="review"] { background: var(--pearl); }
+  .rev-wrap { min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) 1.1rem clamp(3rem, 6vw, 5rem); }
+  .rev-card {
+    width: 100%; max-width: 620px; background: var(--pearl-elevated);
+    border: 1px solid rgba(15,138,118,.12); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg); padding: clamp(1.6rem, 4.5vw, 2.8rem);
+  }
+  .rev-brand { display: flex; align-items: center; gap: .65rem; justify-content: center; margin-bottom: 1.4rem; }
+  .rev-brand .brand-mark { width: 40px; height: 40px; border-radius: 11px; background: var(--mint-600);
+    display: grid; place-items: center; }
+  .rev-brand .brand-mark svg { width: 24px; height: 24px; }
+  .rev-brand b { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); font-weight: 600; }
+  .rev-brand span { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--mint-600); }
+
+  .rev-step { animation: revIn .45s ease both; }
+  @keyframes revIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  .rev-eyebrow { text-align: center; font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--mint-600); font-weight: 700; margin-bottom: .5rem; }
+  .rev-title { font-family: var(--font-display); text-align: center; color: var(--ink);
+    font-size: clamp(1.5rem, 5vw, 2.05rem); line-height: 1.15; font-weight: 600; }
+  .rev-sub { text-align: center; color: var(--body); margin-top: .65rem; font-size: 1rem; }
+
+  /* Stars */
+  .stars { display: flex; justify-content: center; gap: .35rem; margin: 1.7rem 0 .4rem; }
+  .star { background: none; border: none; cursor: pointer; padding: .15rem; line-height: 0;
+    transition: transform .15s ease; }
+  .star svg { width: clamp(42px, 11vw, 56px); height: clamp(42px, 11vw, 56px); }
+  .star .s-fill { fill: #e2ddd0; transition: fill .15s ease; }
+  .star:hover { transform: scale(1.12); }
+  .star.is-on .s-fill { fill: var(--gold); }
+  .star-help { text-align: center; color: var(--body); font-size: .9rem; min-height: 1.3em; font-weight: 500; }
+
+  /* Chips */
+  .chips { display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center; margin: 1.4rem 0 .4rem; }
+  .chip {
+    font-family: var(--font-body); font-size: .92rem; font-weight: 500; color: var(--ink-soft);
+    background: var(--pearl); border: 1.5px solid rgba(15,138,118,.20); border-radius: 999px;
+    padding: .6rem 1rem; cursor: pointer; transition: all .16s ease; user-select: none; display: inline-flex; align-items: center; gap: .4rem;
+  }
+  .chip:hover { border-color: var(--mint-400); }
+  .chip.is-on { background: var(--mint-600); border-color: var(--mint-600); color: #fff; }
+  .chip.is-on .chip-tick { opacity: 1; transform: scale(1); }
+  .chip-tick { width: 14px; height: 14px; opacity: 0; transform: scale(.4); transition: all .16s ease; }
+
+  .rev-note { display: block; width: 100%; margin-top: 1.1rem; border-radius: 14px;
+    border: 1.5px solid rgba(15,138,118,.20); background: var(--pearl); padding: .85rem 1rem;
+    font-family: var(--font-body); font-size: 1rem; color: var(--ink); resize: vertical; min-height: 92px; }
+  .rev-note:focus { outline: none; border-color: var(--mint-400); }
+
+  .rev-actions { margin-top: 1.7rem; display: flex; flex-direction: column; gap: .7rem; }
+  .rev-actions .btn { width: 100%; justify-content: center; }
+  .rev-skip { text-align: center; background: none; border: none; color: var(--body);
+    font-family: var(--font-body); font-size: .9rem; cursor: pointer; text-decoration: underline; padding: .3rem; }
+  .rev-skip:hover { color: var(--mint-600); }
+
+  .gbadge { display: inline-flex; align-items: center; gap: .5rem; }
+  .gbadge svg { width: 20px; height: 20px; }
+
+  .rev-hint { text-align: center; font-size: .82rem; color: var(--body); margin-top: .9rem; line-height: 1.5; }
+  .copied { display: inline-block; margin-top: .6rem; text-align: center; width: 100%; color: var(--mint-600);
+    font-weight: 600; font-size: .9rem; opacity: 0; transition: opacity .2s; }
+  .copied.show { opacity: 1; }
+
+  .hidden { display: none !important; }
+  .back-home { text-align: center; margin-top: 1.6rem; }
+  .back-home a { color: var(--body); font-size: .85rem; text-decoration: none; }
+  .back-home a:hover { color: var(--mint-600); }
+  .success-ico { width: 84px; height: 84px; margin: 0 auto 1.2rem; display: grid; place-items: center;
+    background: var(--mint-50); border-radius: 50%; }
+  .success-ico svg { width: 44px; height: 44px; stroke: var(--mint-600); }
+</style>
+</head>
+<body data-page="review">
+<div class="rev-wrap">
+  <div class="rev-card">
+
+    <div class="rev-brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3.2c-2-1.4-4.4-1.6-6 .1C3.9 5.6 3.6 9.3 4.7 13c.7 2.4 1.2 5 2.1 6.4.7 1 2 .8 2.3-.6.3-1.4.5-3.2 1.2-3.9.5-.5 1-.5 1.4 0 .7.7.9 2.5 1.2 3.9.3 1.4 1.6 1.6 2.3.6.9-1.4 1.4-4 2.1-6.4 1.1-3.7.8-7.4-1.3-9.7-1.6-1.7-4-1.5-6-.1Z" fill="#fff"/></svg></span>
+      <span class="brand-text"><b>Singh Dental Clinic</b><span>Mansa · Dr. Lovepreet Singh</span></span>
+    </div>
+
+    <!-- STEP 1 — Rating -->
+    <section class="rev-step" id="step-rate">
+      <p class="rev-eyebrow">30-second feedback</p>
+      <h1 class="rev-title">How was your visit?</h1>
+      <p class="rev-sub">Your rating helps us keep improving your care.</p>
+      <div class="stars" id="stars" role="radiogroup" aria-label="Star rating">
+        <!-- stars injected by JS -->
+      </div>
+      <p class="star-help" id="star-help">Tap a star to rate</p>
+    </section>
+
+    <!-- STEP 2 — Positive (4–5 stars) -->
+    <section class="rev-step hidden" id="step-good">
+      <p class="rev-eyebrow">Thank you! 🌿</p>
+      <h1 class="rev-title">What did you love most?</h1>
+      <p class="rev-sub">Pick everything that applies — we'll add it to your review.</p>
+      <div class="chips" id="chips-good"></div>
+      <div class="rev-actions">
+        <a class="btn btn-primary btn-lg gbadge" id="go-google" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path fill="#fff" d="M12 11v2.8h4a3.9 3.9 0 01-1.7 2.5l2.6 2a7.9 7.9 0 002.4-6 9 9 0 00-.1-1.3H12Z"/><path fill="#fff" d="M6.5 14.3l-.6.4-2 1.6A8 8 0 0012 20a7.6 7.6 0 005.3-1.9l-2.6-2A4.8 4.8 0 0112 16.8a4.8 4.8 0 01-4.5-3.3l-1 .8Z"/><path fill="#fff" d="M3.9 7.7A7.9 7.9 0 004 16.3l2.6-2a4.7 4.7 0 010-3l-2.7-2.1Z"/><path fill="#fff" d="M12 7.3a4.3 4.3 0 013 1.2l2.3-2.3A7.7 7.7 0 0012 4a8 8 0 00-7.1 3.7l2.6 2.1A4.8 4.8 0 0112 7.3Z"/></svg>
+          Post my review on Google
+        </a>
+        <span class="copied" id="copied-msg">✓ Your highlights are copied — just paste &amp; post on Google!</span>
+        <button class="rev-skip" id="good-skip" type="button">No thanks, take me home</button>
+      </div>
+      <p class="rev-hint">A Google review only takes a few seconds and means the world to a small local clinic. Thank you! 💚</p>
+    </section>
+
+    <!-- STEP 3 — Needs improvement (1–3 stars) -->
+    <section class="rev-step hidden" id="step-bad">
+      <p class="rev-eyebrow">We're sorry to hear that</p>
+      <h1 class="rev-title">How can we do better?</h1>
+      <p class="rev-sub">Tell us what went wrong — this comes straight to us, privately.</p>
+      <div class="chips" id="chips-bad"></div>
+      <textarea class="rev-note" id="bad-note" placeholder="Anything else you'd like us to know? (optional)"></textarea>
+      <div class="rev-actions">
+        <a class="btn btn-primary btn-lg gbadge" id="go-whatsapp" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2Zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20Zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1a6.6 6.6 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 000-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3c-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.2.7 3 .6.5 0 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.2Z"/></svg>
+          Send feedback privately
+        </a>
+        <button class="rev-skip" id="bad-back" type="button">← Change my rating</button>
+      </div>
+      <p class="rev-hint">We read every message and will make it right. Thank you for helping us improve. 🙏</p>
+    </section>
+
+    <!-- STEP 4 — Thank you -->
+    <section class="rev-step hidden" id="step-done">
+      <div class="success-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
+      <h1 class="rev-title">Thank you! 💚</h1>
+      <p class="rev-sub" id="done-msg">We truly appreciate you taking the time.</p>
+      <div class="rev-actions">
+        <a class="btn btn-primary btn-lg" href="index.html">Back to our website</a>
+        <a class="btn btn-ghost btn-lg" href="booking.html">Book another visit</a>
+      </div>
+    </section>
+
+    <div class="back-home">
+      <a href="index.html">Singh Dental Clinic · Mansa, Punjab</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONFIG — edit these two lines if your details ever change
+   ============================================================ */
+// Direct link to your Google listing (derived from your real Google Maps place).
+// Tip: if you have a Google Business Profile, you can paste your shorter
+// "https://g.page/r/XXXX/review" link here for an even more direct review popup.
+const GOOGLE_REVIEW_URL = "https://www.google.com/maps?cid=11212397342694922583";
+// Clinic WhatsApp number (digits only, with country code) for private feedback.
+const WHATSAPP_NUMBER = "917087315856";
+
+/* ---- Feedback options ---- */
+const GOOD_OPTIONS = [
+  "Friendly & caring staff",
+  "Gentle, painless treatment",
+  "Dr. Singh explained everything clearly",
+  "Very clean & hygienic",
+  "Short waiting time",
+  "Fair & honest pricing",
+  "Modern equipment",
+  "Comfortable & calm clinic",
+  "Great with kids / family",
+  "Easy WhatsApp booking",
+  "Happy with my results",
+  "My pain / problem was solved",
+  "Professional & skilled",
+  "Would recommend to others",
+];
+const BAD_OPTIONS = [
+  "Long waiting time",
+  "Hard to book or reach you",
+  "Treatment felt rushed",
+  "Wanted a clearer explanation",
+  "Pricing concerns",
+  "Cleanliness",
+  "Staff behaviour",
+  "Clinic comfort",
+  "Results not as expected",
+  "Pain during or after treatment",
+  "Appointment scheduling",
+  "Parking / location",
+];
+
+/* ---- Elements ---- */
+const $ = (id) => document.getElementById(id);
+const TICK = '<svg class="chip-tick" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>';
+let rating = 0;
+
+/* ---- Build stars ---- */
+const STAR_LABELS = ["", "Poor", "Could be better", "Okay", "Good", "Excellent!"];
+const starsBox = $("stars");
+for (let i = 1; i <= 5; i++) {
+  const b = document.createElement("button");
+  b.className = "star"; b.type = "button"; b.dataset.val = i;
+  b.setAttribute("role", "radio"); b.setAttribute("aria-label", i + " star" + (i > 1 ? "s" : ""));
+  b.innerHTML = '<svg viewBox="0 0 24 24"><path class="s-fill" d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 21.4 6.2 20.5l1.1-6.5L2.6 9.4l6.5-.9L12 2.6Z"/></svg>';
+  b.addEventListener("mouseenter", () => paintStars(i));
+  b.addEventListener("mouseleave", () => paintStars(rating));
+  b.addEventListener("click", () => chooseRating(i));
+  starsBox.appendChild(b);
+}
+function paintStars(n) {
+  [...starsBox.children].forEach((s, idx) => s.classList.toggle("is-on", idx < n));
+  $("star-help").textContent = n ? STAR_LABELS[n] : "Tap a star to rate";
+}
+
+/* ---- Build chip groups ---- */
+function buildChips(container, options) {
+  options.forEach((label) => {
+    const c = document.createElement("button");
+    c.className = "chip"; c.type = "button"; c.dataset.label = label;
+    c.innerHTML = '<span>' + label + '</span>' + TICK;
+    c.addEventListener("click", () => c.classList.toggle("is-on"));
+    container.appendChild(c);
+  });
+}
+buildChips($("chips-good"), GOOD_OPTIONS);
+buildChips($("chips-bad"), BAD_OPTIONS);
+
+function selected(container) {
+  return [...container.querySelectorAll(".chip.is-on")].map((c) => c.dataset.label);
+}
+function show(stepId) {
+  ["step-rate", "step-good", "step-bad", "step-done"].forEach((id) =>
+    $(id).classList.toggle("hidden", id !== stepId));
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+/* ---- Flow ---- */
+function chooseRating(n) {
+  rating = n; paintStars(n);
+  setTimeout(() => { show(n >= 4 ? "step-good" : "step-bad"); }, 280);
+}
+
+/* Positive path → copy highlights to clipboard, then open Google */
+$("go-google").addEventListener("click", (e) => {
+  const picks = selected($("chips-good"));
+  let text = "Great experience at Singh Dental Clinic, Mansa";
+  if (picks.length) text += " — " + picks.join(", ") + ".";
+  else text += "!";
+  text += " Highly recommend Dr. Lovepreet Singh.";
+  try {
+    navigator.clipboard.writeText(text);
+    $("copied-msg").classList.add("show");
+  } catch (_) {}
+  e.currentTarget.href = GOOGLE_REVIEW_URL;
+  // Let the link open Google in a new tab, then show the thank-you here.
+  setTimeout(() => {
+    $("done-msg").textContent = "Your review highlights are copied — just paste & post on Google. You're amazing! 💚";
+    show("step-done");
+  }, 900);
+});
+$("good-skip").addEventListener("click", () => {
+  $("done-msg").textContent = "We truly appreciate you taking the time to rate us!";
+  show("step-done");
+});
+
+/* Negative path → send private message on WhatsApp */
+$("go-whatsapp").addEventListener("click", (e) => {
+  const picks = selected($("chips-bad"));
+  const note = $("bad-note").value.trim();
+  let msg = "Hello Singh Dental Clinic, I'd like to share private feedback.\n";
+  msg += "My rating: " + rating + "/5 ★\n";
+  if (picks.length) msg += "Areas to improve: " + picks.join(", ") + "\n";
+  if (note) msg += "Details: " + note + "\n";
+  msg += "(Sent from your website feedback page)";
+  e.currentTarget.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg);
+  setTimeout(() => {
+    $("done-msg").textContent = "Thank you for telling us — we'll make it right. 🙏";
+    show("step-done");
+  }, 700);
+});
+$("bad-back").addEventListener("click", () => { rating = 0; paintStars(0); show("step-rate"); });
+</script>
+</body>
+</html>
