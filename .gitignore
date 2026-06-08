@@ -1,0 +1,17 @@
+# dependencies
+node_modules/
+
+# dev tooling output
+temporary screenshots/
+*.output
+_check.mjs
+
+# source / instruction files (not needed for the live site)
+CLAUDE (1).md
+SKILL (2).md
+Man_brushing_teeth_shine_202606081024.mp4
+Screenshot 2026-06-08 at 11-02-13 Instagram.png
+
+# os
+Thumbs.db
+.DS_Store
